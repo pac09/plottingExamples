@@ -1,17 +1,79 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@*
+    Texto anterior en la vista...
+        
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+    <address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>
+    
+*@
+
+<script>
+
+    brd = JXG.JSXGraph.initBoard('jxgbox', {boundingbox:[-2,30,70,-5], axis:true});
+    var graph1,graph2,graph3,graph4,graph5;
+    var periodical;
+ 
+    function doIt() {
+        //new Ajax.Request('/ajax/ajaxserv.php', {
+        new Ajax.Request('/Home/Contact', {
+            onComplete: function(transport) {
+                if (200 == transport.status) {
+                    var t = transport.responseText;
+                    var a = t.split(';');
+                    var x = [];
+                    var y = [];
+                    for (var i=0;i<a.length-1;i++) { // The last array entry is empty
+                        var b = a[i].split(',');
+                        x[i]=b[0]*1.0;  
+                        y[i]=b[1]*1.0;
+                    }
+                    var m = JXG.Math.Statistics.mean(y);
+                    var sd = JXG.Math.Statistics.sd(y);
+                    var med = JXG.Math.Statistics.median(y);
+                    if (!graph1) { 
+                        graph1 = brd.create('curve', [x,y],{strokeWidth:3}); 
+                        graph2 = brd.create('curve', [[x[0],x[x.length-1]],[m,m]], {strokecolor:'red'}); 
+                        graph3 = brd.create('curve', [[x[0],x[x.length-1]],[m+sd,m+sd]], {strokecolor:'red',dash:2}); 
+                        graph4 = brd.create('curve', [[x[0],x[x.length-1]],[m-sd,m-sd]], {strokecolor:'red',dash:2}); 
+                        graph5 = brd.create('curve', [[x[0],x[x.length-1]],[med,med]], {strokecolor:'red',dash:1}); 
+                    } else {
+                        graph1.dataX = x;                    graph1.dataY = y;
+                        graph2.dataX = [x[0],x[x.length-1]]; graph2.dataY = [m,m];
+                        graph3.dataX = [x[0],x[x.length-1]]; graph3.dataY = [m+sd,m+sd];
+                        graph4.dataX = [x[0],x[x.length-1]]; graph4.dataY = [m-sd,m-sd];
+                        graph5.dataX = [x[0],x[x.length-1]]; graph5.dataY = [med,med];
+                    }
+                    brd.update();
+                    document.getElementById('output').innerHTML = 'Statistics:<br>'+ 'Mean value=' + brd.round(m,2)+'<br>Median=' + brd.round(med,2)+'<br>Sd='+brd.round(sd,2);
+                };
+            }
+        });
+    };
+ 
+    function Start() {
+        periodical = setInterval(doIt,1000);
+    };
+ 
+    function Stop() {
+        if (periodical) {
+            clearInterval(periodical);
+        }
+    };
+
+</script>
