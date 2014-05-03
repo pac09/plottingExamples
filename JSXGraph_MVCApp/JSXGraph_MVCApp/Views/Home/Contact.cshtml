@@ -1,6 +1,16 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    //@ViewData["t"];
 }
+
+
+<div id="box" class="jxgbox" style="width:400px; height:400px;">
+</div>
+
+<script type="text/javascript">
+    var board = JXG.JSXGraph.initBoard('box', { boundingbox: [-2, 4, 6, -4], axis: true, grid: true});
+</script>
+
 
 
 @*
@@ -23,7 +33,11 @@
     
 *@
 
-<script>
+
+
+
+
+@*<script>
 
     brd = JXG.JSXGraph.initBoard('jxgbox', {boundingbox:[-2,30,70,-5], axis:true});
     var graph1,graph2,graph3,graph4,graph5;
@@ -34,7 +48,9 @@
         new Ajax.Request('/Home/Contact', {
             onComplete: function(transport) {
                 if (200 == transport.status) {
-                    var t = transport.responseText;
+                    //var t = transport.responseText;
+
+                    var t = '@@ViewData["t"]';
                     var a = t.split(';');
                     var x = [];
                     var y = [];
@@ -76,4 +92,4 @@
         }
     };
 
-</script>
+</script>*@

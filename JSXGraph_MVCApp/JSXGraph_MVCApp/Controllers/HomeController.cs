@@ -24,18 +24,18 @@ namespace JSXGraph_MVCApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            string[] t = new string[0];
+            string[] t = new string[70];
             Random rnd = new Random();
 
             for (int i = 0; i < 70; i++)
             {
-                Int32[] x = new Int32[0];
+                Int32[] x = new Int32[70];
                 x[i] = i;
 
-                Int32[] y = new Int32[0];
+                Int32[] y = new Int32[70];
                 y[i] = rnd.Next(0, 20);
 
-                t[i] = x[i] + "," + y[i] + ";";
+                t[i] = (x[i] + "," + y[i] + ";").ToString();
                 //$t = "";
                 //for ($i=0;$i<70;$i++) {
                 //    $x = $i;
