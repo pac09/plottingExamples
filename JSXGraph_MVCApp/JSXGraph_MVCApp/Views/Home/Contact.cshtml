@@ -4,14 +4,27 @@
 }
 
 
-<div id="box" class="jxgbox" style="width:400px; height:400px;">
+<div id="box" class="jxgbox" style="width:970px; height:700px;">
 </div>
 
-<script type="text/javascript">
-    var board = JXG.JSXGraph.initBoard('box', { boundingbox: [-2, 4, 6, -4], axis: true, grid: true});
-</script>
 
 
+@section scripts
+{
+    <script type="text/javascript">
+
+        JXG.Options = JXG.merge(JXG.Options, {
+            showNavigation: false
+        });
+
+        var board = JXG.JSXGraph.initBoard('box', { boundingbox: [-1, 25, 25, -1], axis: true, grid: true });
+        var p1 = board.create('point', [1, 2], { fixed: true, name: 'A', size: 2 });
+        var p2 = board.create('point', [2, 5], { fixed: true, name: 'B', size: 2 });
+
+        var li = board.create('line', ["A", "B"], { straightFirst: false, straightLast: false, strokeColor: '#00ff00', strokeWidth: 2 });
+    </script>
+
+}
 
 @*
     Texto anterior en la vista...
