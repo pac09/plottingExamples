@@ -1,7 +1,40 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>Ejemplo 1</h2>
+<h3>Plano cartesiano (6, 6) en el primer cuadrante</h3>
 
-<p>Use this area to provide additional information.</p>
+
+
+
+<div id="box" class="jxgbox" style="width:970px; height:850px;">
+</div>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        
+
+        var board = JXG.JSXGraph.initBoard('box', {
+            boundingbox: [-1, 6, 6, -1], axis: true, grid: false
+        });
+
+        var im = board.create('image', ['../Assets/riskMap55.png', [function () { return 0; }, function () { return 0; }], [5, 5]], { opacity: function () { return 2.0 / 0; } });
+
+        //var brd = JXG.JSXGraph.initBoard('box2', { boundingbox: [-5, 5, 5, -5], axis: true });
+        //var p = board.create('point', [0, 0], { size: 1, opacity: 0.1 });
+
+        //var im = board.create('image', ['../Assets/riskMap.png', [function () { return 0; }, function () { return 0; }], [25, 25]], { opacity: function () { return 2.0 / 0; } });
+
+        //var im = board.create('image', ['../Assets/riskMap.png', [0, 0], [25, 25]]);
+
+        //var p1 = board.create('point', [1, 2], { color: '#6f7175', fixed: true, name: 'A', size: 2 });
+        //var p2 = board.create('point', [2, 5], { color: '#6f7175', fixed: true, name: 'B', size: 2 });
+
+        //var li = board.create('line', ["A", "B"], { straightFirst: false, straightLast: false, strokeColor: '#000000', strokeWidth: 1 });
+    </script>
+
+}

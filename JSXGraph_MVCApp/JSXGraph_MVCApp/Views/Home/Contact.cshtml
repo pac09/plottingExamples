@@ -2,7 +2,8 @@
     ViewBag.Title = "Contact";
     //@ViewData["t"];
 }
-
+<h2>Ejemplo 1</h2>
+<h3>Plano cartesiano (25, 25) en el primer cuadrante</h3>
 
 <div id="box" class="jxgbox" style="width:970px; height:700px;">
 </div>
@@ -60,10 +61,10 @@
         
         //var im = board.create('image', ['../Assets/riskMap.png', [0, 0], [25, 25]]);
         
-        //var p1 = board.create('point', [1, 2], { color: '#6f7175', fixed: true, name: 'A', size: 2 });
-        //var p2 = board.create('point', [2, 5], { color: '#6f7175', fixed: true, name: 'B', size: 2 });
+        var p1 = board.create('point', [1, 2], { color: '#6f7175', fixed: true, name: 'A', size: 2 });
+        var p2 = board.create('point', [2, 5], { color: '#6f7175', fixed: true, name: 'B', size: 2 });
 
-        //var li = board.create('line', ["A", "B"], { straightFirst: false, straightLast: false, strokeColor: '#000000', strokeWidth: 1 });
+        var li = board.create('line', ["A", "B"], { straightFirst: false, straightLast: false, strokeColor: '#000000', strokeWidth: 1 });
     </script>
 
 }
